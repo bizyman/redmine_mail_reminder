@@ -20,7 +20,7 @@ Redmine::Plugin.register :redmine_mail_reminder do
   name 'Redmine Mail Reminder plugin'
   author 'Jethro'
   description 'Issue reminder plugin for Redmine, based on Ascendro S.R.L version https://github.com/ascendro/redmine_issue_reminder '
-  version '3.0.0.0001'
+  version '3.0.1'
   url 'https://github.com/Hopebaytech/redmine_mail_reminder'
 
   permission :view_issue_reminder, :mail_reminders => :index
