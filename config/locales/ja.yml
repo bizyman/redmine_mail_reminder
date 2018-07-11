@@ -1,5 +1,6 @@
 # Japanese strings go here for Rails i18n
 ja:
+  :project_module_issue_reminder: "メールリマインダー"
   :issues_reminder: "メールリマインダー"
   :reminder_settings: "リマインダー設定"
   :daily: "毎日"
