@@ -1,3 +1,5 @@
+require_relative '../jobs/mail_reminder_job'
+
 class MailRemindersController < ApplicationController
   unloadable
 
@@ -31,6 +33,7 @@ class MailRemindersController < ApplicationController
         end
       end
       flash[:notice] = t :reminder_created
+      MailReminderJob.perform_later(Rails.env)
     else
       flash[:error] = t :reminder_not_created
     end
