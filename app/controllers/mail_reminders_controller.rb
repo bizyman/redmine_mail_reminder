@@ -33,7 +33,6 @@ class MailRemindersController < ApplicationController
         end
       end
       flash[:notice] = t :reminder_created
-      MailReminderJob.perform_later(Rails.env)
     else
       flash[:error] = t :reminder_not_created
     end
@@ -88,6 +87,11 @@ class MailRemindersController < ApplicationController
     render partial: "interval_values", :locals => { :possible_values => vals, :selected_value => nil, :reminder => reminder} 
   end
 
+  def run_reminder_job
+    MailReminderJob.perform_later(params[:env])
+    head :ok
+  end
+
   private
 
   def find_project
@@ -99,6 +103,6 @@ class MailRemindersController < ApplicationController
   end
 
   def permit_params
-    params.require(:reminder).permit(:project_id, :query_id, :interval)
+    params.require(:reminder).permit(:project_id, :query_id, :interval, :env)
   end
 end
