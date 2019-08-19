@@ -1,3 +1,5 @@
+require_relative '../jobs/mail_reminder_job'
+
 class MailRemindersController < ApplicationController
   unloadable
 
@@ -85,6 +87,11 @@ class MailRemindersController < ApplicationController
     render partial: "interval_values", :locals => { :possible_values => vals, :selected_value => nil, :reminder => reminder} 
   end
 
+  def run_reminder_job
+    MailReminderJob.perform_later(params[:env])
+    head :ok
+  end
+
   private
 
   def find_project
@@ -96,6 +103,6 @@ class MailRemindersController < ApplicationController
   end
 
   def permit_params
-    params.require(:reminder).permit(:project_id, :query_id, :interval)
+    params.require(:reminder).permit(:project_id, :query_id, :interval, :env)
   end
 end
